@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup OCaml
+      uses: ocaml/setup-ocaml@v2
+      with:
+        ocaml-version: 4.14.0
+        opam-cache: true
+        
+    - name: Install deps
+      run: |
+        opam install dune ounit2 ocamlformat.0.26.2 zanuda
+
+    - name: Formatter
+      run: |
+        dune fmt
+
+    - name: Linter
+      run: |
+        zanuda -dir .
+
+    - name: Build
+      run: |
+        dune build --display=short @check -j3 || (if grep -q "Warning" dune.log; then exit 1; fi)
+
+    - name: Test
+      run: |
+        dune runtest
