@@ -20,14 +20,19 @@ jobs:
       uses: ocaml/setup-ocaml@v2
       with:
         ocaml-compiler: "4.14.0"
-        
-    - run: opam install . --deps-only --with-test
-
-    - run: opam exec -- dune fmt
-
-    - run: zanuda -dir .
-
-    - run: opam exec -- dune build --display=short @check -j3 || (if grep -q "Warning" dune.log; then exit 1; fi)
-
-    - run: opam exec -- dune runtest
+    
+    - name: Install deps
+      run: opam install dune zanuda ocamlformat.0.26.2
+    
+    - name: Formatter
+      run: dune fmt
+    
+    - name: Linter
+      run: zanuda -dir .
+    
+    - name: Build
+      run: dune build --display=short @check -j3 || (if grep -q "Warning" dune.log; then exit 1; fi)
+    
+    - name: Tests
+      run: dune runtest
               
