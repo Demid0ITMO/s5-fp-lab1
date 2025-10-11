@@ -11,32 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout tree
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
-    - name: Set up OCaml
+    - name: Set-up OCaml
       uses: ocaml/setup-ocaml@v2
       with:
         ocaml-compiler: "5.2"
         
-    - name: Install deps
-      run: |
-        opam install dune ounit2 ocamlformat.0.26.2 zanuda
+    - run: opam install . --deps-only --with-test
 
-    - name: Formatter
-      run: |
-        dune fmt
+    - run: opam exec -- dune fmt
 
-    - name: Linter
-      run: |
-        zanuda -dir .
+    - run: zanuda -dir .
 
-    - name: Build
-      run: |
-        dune build --display=short @check -j3 || (if grep -q "Warning" dune.log; then exit 1; fi)
+    - run: opam exec -- dune build --display=short @check -j3 || (if grep -q "Warning" dune.log; then exit 1; fi)
 
-    - name: Test
-      run: |
-        dune runtest
+    - run: opam exec -- dune runtest
+              
