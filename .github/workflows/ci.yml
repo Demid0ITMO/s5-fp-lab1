@@ -16,11 +16,10 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Setup OCaml
+    - name: Set up OCaml
       uses: ocaml/setup-ocaml@v2
       with:
-        ocaml-version: 4.14.0
-        opam-cache: true
+        ocaml-compiler: "5.2"
         
     - name: Install deps
       run: |
