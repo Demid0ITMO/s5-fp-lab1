@@ -19,7 +19,7 @@ jobs:
     - name: Set-up OCaml
       uses: ocaml/setup-ocaml@v2
       with:
-        ocaml-compiler: "3.08.0"
+        ocaml-compiler: "4.14.0"
         
     - run: opam install . --deps-only --with-test
 
