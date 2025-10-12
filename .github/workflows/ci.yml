@@ -22,7 +22,9 @@ jobs:
         ocaml-compiler: "4.14.0"
     
     - name: Install deps
-      run: opam install dune zanuda ocamlformat.0.26.2
+      run: |
+        opam install dune zanuda ocamlformat.0.26.2
+        eval $(opam env)
     
     - name: Formatter
       run: dune fmt
