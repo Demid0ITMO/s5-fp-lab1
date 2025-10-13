@@ -27,14 +27,14 @@ jobs:
         eval $(opam env)
     
     - name: Formatter
-      run: dune fmt
+      run: opam exec -- dune fmt
     
     - name: Linter
       run: zanuda -dir .
     
     - name: Build
-      run: dune build --display=short @check -j3 || (if grep -q "Warning" dune.log; then exit 1; fi)
+      run: opam exec -- dune build --display=short @check -j3 || (if grep -q "Warning" dune.log; then exit 1; fi)
     
     - name: Tests
-      run: dune runtest
+      run: opam exec -- dune runtest
               
