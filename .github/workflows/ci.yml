@@ -30,7 +30,7 @@ jobs:
       run: opam exec -- dune fmt
     
     - name: Linter
-      run: zanuda -dir .
+      run: opam exec -- zanuda -dir .
     
     - name: Build
       run: opam exec -- dune build --display=short @check -j3 || (if grep -q "Warning" dune.log; then exit 1; fi)
