@@ -92,6 +92,5 @@ let solve_map () =
   |> List.fold_left ( + ) 0
 
 let solve_lazy () =
-  let number_seq = Seq.ints 1 |> Seq.take 1000 in
-  number_seq |> Seq.map number_to_string |> Seq.map String.length
-  |> Seq.fold_left ( + ) 0
+  Seq.ints 1 |> Seq.map number_to_string |> Seq.map String.length
+  |> Seq.take 1000 |> Seq.fold_left ( + ) 0
