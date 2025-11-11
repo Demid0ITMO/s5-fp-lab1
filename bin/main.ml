@@ -14,4 +14,4 @@ let () =
   Printf.printf "Recursive: %d\n" (Problem17.solve_rec ());
   Printf.printf "Module: %d\n" (Problem17.solve_module ());
   Printf.printf "Map: %d\n" (Problem17.solve_map ());
-  Printf.printf "Lazy: %d\n" (Problem17.solve_lazy ());
+  Printf.printf "Lazy: %d\n" (Problem17.solve_lazy ())

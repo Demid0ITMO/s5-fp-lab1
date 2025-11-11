@@ -16,9 +16,10 @@ let test_problem17 _ =
   assert_equal expected (Problem17.solve_lazy ())
 
 let suite =
-  "Lab1 Tests" >::: [
-    "Problem 13 - Large Sum" >:: test_problem13;
-    "Problem 17 - Number Letter Count" >:: test_problem17;
-  ]
+  "Lab1 Tests"
+  >::: [
+         "Problem 13 - Large Sum" >:: test_problem13;
+         "Problem 17 - Number Letter Count" >:: test_problem17;
+       ]
 
 let () = run_test_tt_main suite
