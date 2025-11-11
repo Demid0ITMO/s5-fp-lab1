@@ -1,4 +1,5 @@
 (executable
  (public_name lab1)
  (name main)
- (libraries lab1))
+ (libraries problem13 problem17)
+ (preprocess (pps ppx_inline_test)))
